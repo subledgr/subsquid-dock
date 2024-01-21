@@ -1,0 +1,6 @@
+{
+  "outDir": "src/types",
+  "specVersions": "typegen-dock.jsonl",
+  "typesBundle": "typegen-dock-typesBundle.json",
+  "constants": true
+}

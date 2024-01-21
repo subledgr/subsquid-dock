@@ -1,0 +1,43 @@
+{
+  "outDir": "src/types",
+  "specVersions": "typegen-dock.jsonl",
+  "pallets": {
+    "TransactionPayment": {
+      "events": [
+        "TransactionFeePaid"
+      ]
+    },
+    "Balances": {
+      "events": [
+        "BalanceSet",
+        "Deposit",
+        "DustLost",
+        "Endowed",
+        "NewAccount",
+        "ReapedAccount",
+        "Reserved",
+        "ReserveRepatriated",
+        "Slashed",
+        "Transfer",
+        "Unreserved",
+        "Withdraw"
+      ],
+      "calls": [],
+      "storage": [],
+      "constants": []
+    },
+    "Staking": {
+      "events": [
+        "Bonded",
+        "Claimed",
+        "Reward",
+        "Rewarded",
+        "Slashed",
+        "Unbonded"
+      ],
+      "calls": [],
+      "storage": [],
+      "constants": []
+    }
+  }
+}

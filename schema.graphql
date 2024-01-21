@@ -1,0 +1,88 @@
+type Block @entity {
+  "Block number"
+  id: ID!
+  "Block hash"
+  hash: String! @index
+  "Block timestamp"
+  timestamp: DateTime! @index
+  # "Block events"
+  # events: [Event!] @derivedFrom(field: "blockNumber")
+  # "Block extrinsics"
+  # extrinsics: [Extrinsic!] @derivedFrom(field: "blockNumber")
+  # "Block transfers"
+  # transfers: [Transfer!] @derivedFrom(field: "blockNumber")
+}
+
+type ChainEvent @entity {
+  "Event id (blockNumber-index)"
+  id: ID!
+  "Event block"
+  blockNumber: Int! @index
+  "Event index in block"
+  index: Int! @index
+  "Event extrinsicId"
+  extrinsicId: String! @index
+  "Event section"
+  section: String! @index
+  "Event method"
+  method: String! @index
+  "Event data"
+  data: String! @index
+  "Event timestamp"
+  timestamp: DateTime! @index
+}
+
+type Extrinsic @entity {
+  "Extrinsic id (blockNumber-index)"
+  id: ID!
+  "Extrinsic block"
+  blockNumber: Int! @index
+  "Extrinsic index in block"
+  index: Int! @index
+  "Extrinsic hash"
+  hash: String! @index
+  "Extrinsic timestamp"
+  timestamp: DateTime! @index
+  "Extrinsic signer"
+  signer: String! @index # Account! @derivedFrom(field: "extrinsics")
+  "Extrinsic section"
+  section: String! @index
+  "Extrinsic method"
+  method: String! @index
+  # "Extrinsic signer"
+  # signer: Account! @derivedFrom(field: "extrinsics")
+  # "Extrinsic events"
+  # events: [Event!] @derivedFrom(field: "extrinsicHash")
+  # "Extrinsic transfers"
+  # transfers: [Transfer!] @derivedFrom(field: "extrinsicHash")
+  "Extrinsic fee"
+  fee: BigInt! # fee is calculated at the best effort and may be zero for some old extrinsics
+  "Extrinsic success"
+  success: Boolean @index
+}
+
+type Account @entity {
+  "Account address"
+  id: ID!
+  "Account transfers in"
+  transfersTo: [Transfer!] @derivedFrom(field: "to")
+  "Account transfers out"
+  transfersFrom: [Transfer!] @derivedFrom(field: "from")
+  # "Account extrinsics"
+  # extrinsics: [Extrinsic!] @derivedFrom(field: "signer")
+}
+
+type Transfer @entity {
+  id: ID!
+  chainId: String! @index
+  blockNumber: Int! @index
+  timestamp: DateTime! @index
+  extrinsicId: String! @index
+  extrinsicHash: String @index
+  section: String! @index
+  method: String! @index
+  from: Account! @index
+  to: Account! @index
+  amount: BigInt! @index
+  fee: BigInt! # fee is calculated at the best effort and may be zero for some old extrinsics
+}
